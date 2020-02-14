@@ -1,0 +1,108 @@
+#import numpy as np
+#import pandas as pd
+import csv
+
+#写成csv文件较好处理  将loop_metrics.txt 和 roles_metrics.txt处理成一个文件 csv
+#csv 一行长度为47
+
+#32766是NAN的意思
+
+def connect():
+    file1 = open('1990年/EVP.txt', 'r')
+    file2 = open('1990年/GST.txt', 'r')
+    file3 = open('1990年/PRE.txt', 'r')
+    file4 = open('1990年/PRS.txt', 'r')
+    file5 = open('1990年/RHU.txt', 'r')
+    file6 = open('1990年/SSD.txt', 'r')
+    file7 = open('1990年/TEM.txt', 'r')
+    file8 = open('1990年/WIN.txt', 'r')
+    #csvFile = open("data_processed/loop_roles_metrics.csv", "w", newline='')
+    #writer = csv.writer(csvFile)
+    file1_rows = file1.readlines()
+    file2_rows = file2.readlines()
+    file3_rows = file3.readlines()
+    file4_rows = file4.readlines()
+    file5_rows = file5.readlines()
+    file6_rows = file6.readlines()
+    file7_rows = file7.readlines()
+    file8_rows = file8.readlines()
+    i =1
+    for line1 in file1_rows:
+        curLine1 = line1.strip().split(" ")
+        line2 = file2_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine2 = line2.strip().split(" ")
+        line3 = file3_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine3 = line3.strip().split(" ")
+        line4 = file4_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine4 = line4.strip().split(" ")
+        line5 = file5_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine5 = line5.strip().split(" ")
+        line6 = file6_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine6 = line6.strip().split(" ")
+        line7 = file7_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine7 = line7.strip().split(" ")
+        line8 = file8_rows[i - 1]  # 从0开始同步  roles的列表
+        curLine8 = line8.strip().split(" ")
+        #做nan处理
+        if(curLine1[6]=='32766'):
+            curLine1[6] = 'NA'
+        if(curLine1[7]=='32766'):
+            curLine1[7] = 'NA'
+        if(curLine2[6]=='32766'):
+            curLine2[6] = 'NA'
+        if(curLine2[7]=='32766'):
+            curLine2[7] = 'NA'
+        if(curLine2[8]=='32766'):
+            curLine2[8] = 'NA'
+        if(curLine3[6]=='32766'):
+            curLine3[6] = 'NA'
+        if(curLine4[6]=='32766'):
+            curLine4[6] = 'NA'
+        if(curLine4[7]=='32766'):
+            curLine4[7] = 'NA'
+        if(curLine4[8]=='32766'):
+            curLine4[8] = 'NA'
+        if(curLine5[6]=='32766'):
+            curLine5[6] = 'NA'
+        if(curLine5[7]=='32766'):
+            curLine5[7] = 'NA'
+        if(curLine6[6]=='32766'):
+            curLine6[6] = 'NA'
+        if(curLine7[6]=='32766'):
+            curLine7[6] = 'NA'
+        if(curLine7[7]=='32766'):
+            curLine7[7] = 'NA'
+        if(curLine7[8]=='32766'):
+            curLine7[8] = 'NA'
+        if(curLine8[6]=='32766'):
+            curLine8[6] = 'NA'
+        if(curLine8[7]=='32766'):
+            curLine8[7] = 'NA'
+        writer.writerow(
+                ['57729',curLine1[0],  curLine1[1], curLine1[2], curLine1[3], curLine1[4], curLine1[5],
+                 curLine1[6], curLine1[7], curLine2[6], curLine2[7], curLine2[8], curLine3[6], curLine4[6],
+                 curLine4[7], curLine4[8],
+                 curLine5[6], curLine5[7], curLine6[6], curLine7[6], curLine7[7], curLine7[8], curLine8[6],
+                 curLine8[7]])
+
+        i += 1
+    file1.close()
+    file2.close()
+    file3.close()
+    file4.close()
+    file5.close()
+    file6.close()
+    file7.close()
+    file8.close()
+
+
+csvFile = open("1990年/connect.csv", "w", newline='')
+writer = csv.writer(csvFile)
+writer.writerow(
+    ["sid", "lat", "long", "elev", "year", "month", "day", "evp1", "evp2", "stmean",
+     "stmax", "stmin", "pcp", "pmean", "pmax", "pmin"
+        , "rhmean", "rhmin", "dh", "tmean", "tmax", "tmin"
+        , "wsmean", "wsmax"
+    ])
+connect()
+csvFile.close()
