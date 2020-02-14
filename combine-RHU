@@ -1,0 +1,40 @@
+#import numpy as np
+import os
+import math
+
+'''
+author : Jiawei Jiang
+2020 2 13
+'''
+#主要操作 读写txt
+
+#57729  贵州站点编号
+
+def combine_processed(t):
+    filename_old = '1990年/'+'SURF_CLI_CHN_MUL_DAY-RHU-13003-1990'+ t +'.TXT'
+    file_old = open(filename_old,'r')
+    lines = file_old.readlines() #所有列表
+    cont=''
+    for line in lines:
+        z = line.strip().split(' ')
+        m = []
+        for f in z:
+            if(f!=''):
+                m.append(f)
+        if(z[0]=='57729'):
+            cont =m[1] +' '+ m[2] + ' ' + m[3] +' '+m[4]+' '+ m[5]+ ' '+ m[6] +' ' + m[7] + ' ' + m[8]
+            file_new.write(cont)
+            file_new.write('\r\n')
+
+    file_old.close()
+
+
+#可行 就是不是用原先的answer进行读  需要处理的。
+filename_new = '1990年/RHU.txt'
+file_new = open(filename_new,'w',newline='')
+months = ['01', '02', '03', '04', '05', '06', '07', '08', '09',
+           '10', '11', '12']
+for t in months:
+    combine_processed(t)
+
+file_new.close()
